@@ -8,18 +8,25 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.Comparator;
 
 import javax.swing.Icon;
 
 public class ListItem implements Comparable<ListItem> {
 	private int valA;
+	private int valB;
 
-	public ListItem(int valA) {
+	public ListItem(int valA, int valB) {
 		this.valA = valA;
+		this.valB = valB;
 	}
 
 	public int getValA() {
 		return valA;
+	}
+	
+	public int getValB() {
+		return valB;
 	}
 
 	public Icon createIcon(int diameter) {
@@ -28,13 +35,7 @@ public class ListItem implements Comparable<ListItem> {
 
 	@Override
 	public int compareTo(ListItem o) {
-		if (this.valA > o.valA) {
-			return 1;
-		} else if (this.valA < o.valA) {
-			return -1;
-		} else {
-			return 0;
-		}
+		return o.valA - this.valA;
 	}
 
 	public class ItemIcon implements Icon {
@@ -48,18 +49,21 @@ public class ListItem implements Comparable<ListItem> {
 		private int borderSize = DEFAULT_THICKNESS;
 
 		private int valA;
+		private int valB;
 
-		public ItemIcon(int valA) {
+		public ItemIcon(int valA, int valB) {
 			this.valA = valA;
+			this.valB = valB;
 		}
 
-		public ItemIcon(int valA, int diameter) {
-			this(valA);
+		public ItemIcon(int valA, int valB, int diameter) {
+			this(valA, valB);
 			setDiameter(diameter);
 		}
 
 		public ItemIcon(ListItem item) {
 			this.valA = item.getValA();
+			this.valB = item.getValB();
 		}
 
 		public ItemIcon(ListItem item, int diameter) {
@@ -99,7 +103,7 @@ public class ListItem implements Comparable<ListItem> {
 			// draw text
 			Font f = new Font("Arial", Font.BOLD, 14);
 			FontMetrics fm = g.getFontMetrics(f);
-			String str = ((Integer) valA).toString();
+			String str = (((Integer) valA).toString()) + ",\n" + (((Integer) valB).toString());
 			Rectangle2D rect = fm.getStringBounds(str, g2);
 
 			int textHeight = (int) rect.getHeight();

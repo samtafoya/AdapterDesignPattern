@@ -23,8 +23,9 @@ import java.util.Collections;
  */
 public class MyMain {
 	public static void main(String[] args) {
-		int[] array = {25, 37, 12, 8, -5};
+		int[] arrayA = {25, 37, 12, 8, -5};
+		int[] arrayB = {1, 4, 2, 3, 7};
 		
-		DataStructsFrame frame = new DataStructsFrame ("Adapter Design Pattern Demonstration", array);		
+		DataStructsFrame frame = new DataStructsFrame ("Adapter Design Pattern Demonstration", arrayA, arrayB);		
 	}
 }

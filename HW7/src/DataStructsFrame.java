@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class DataStructsFrame extends JFrame {
-	public DataStructsFrame(String title, int[] numbers) {
+	public DataStructsFrame(String title, int[] numbers, int[] bVals) {
 		super(title);
 
 		final JPanel panel = new JPanel();
@@ -18,7 +18,7 @@ public class DataStructsFrame extends JFrame {
 
 		// compare to
 		
-		final ArrayList<ListItem> list = arrayToList(numbers);
+		final ArrayList<ListItem> list = arrayToList(numbers, bVals);
 
 		final ListPanel unorderedList = new ListPanel("Unordered List");
 		unorderedList.setDiameter(75);
@@ -27,14 +27,26 @@ public class DataStructsFrame extends JFrame {
 		final ListPanel orderedList = new ListPanel("Ordered List");
 		orderedList.setDiameter(100);
 
-		JButton sortButton = new JButton("Sort List");
+		JButton sortButton = new JButton("Sort List: A");
 		sortButton.setSize(30, 10);
-		sortButton.setAlignmentX(CENTER_ALIGNMENT);
+		sortButton.setAlignmentX(LEFT_ALIGNMENT);
+		
+		JButton sortButtonB = new JButton("Sort List: B");
+		sortButton.setSize(30, 10);
+		sortButton.setAlignmentX(RIGHT_ALIGNMENT);
 
 		sortButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Collections.sort(list);
-				Collections.reverse(list);
+				orderedList.addItems(list);
+				panel.add(orderedList);
+				pack();
+			}
+		});
+		
+		sortButtonB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				Collections.sort(list, new CompareB ());
 				orderedList.addItems(list);
 				panel.add(orderedList);
 				pack();
@@ -43,6 +55,7 @@ public class DataStructsFrame extends JFrame {
 
 		panel.add(unorderedList);
 		panel.add(sortButton);
+		panel.add(sortButtonB);
 		add(panel);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,11 +63,11 @@ public class DataStructsFrame extends JFrame {
 		setVisible(true);
 	}
 
-	private ArrayList<ListItem> arrayToList(int[] numbers) {
+	private ArrayList<ListItem> arrayToList(int[] numbers, int[] bVals) {
 		ArrayList<ListItem> list = new ArrayList<ListItem>();
 
 		for (int i = 0; i < numbers.length; i++) {
-			ListItem item = new ListItem(numbers[i]);
+			ListItem item = new ListItem(numbers[i], bVals[i]);
 			list.add(item);
 		}
 
