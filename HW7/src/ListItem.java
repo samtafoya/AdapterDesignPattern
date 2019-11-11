@@ -28,7 +28,13 @@ public class ListItem implements Comparable<ListItem> {
 
 	@Override
 	public int compareTo(ListItem o) {
-		return 0;
+		if (this.valA > o.valA) {
+			return 1;
+		} else if (this.valA < o.valA) {
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 
 	public class ItemIcon implements Icon {

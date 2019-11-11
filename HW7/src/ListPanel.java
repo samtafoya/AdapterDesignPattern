@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -27,8 +28,11 @@ public class ListPanel extends JPanel {
 	}
 
 	public void addItems(ArrayList<ListItem> list) {
+		// Added so list is not displayed multiple times
+		removeAll();
 		mList = (ArrayList<ListItem>) list.clone();
 		for (ListItem item : mList)
 			add(new JLabel(item.createIcon(diameter)));
 	}
+	
 }

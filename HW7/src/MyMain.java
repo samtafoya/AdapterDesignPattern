@@ -1,3 +1,4 @@
+import java.util.Collections;
 
 /*
  * Adapter Design Pattern
@@ -20,7 +21,6 @@
  *     
  *    
  */
-// new test
 public class MyMain {
 	public static void main(String[] args) {
 		int[] array = {25, 37, 12, 8, -5};

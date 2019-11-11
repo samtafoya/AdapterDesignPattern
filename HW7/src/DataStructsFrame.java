@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.swing.BoxLayout;
@@ -15,6 +16,8 @@ public class DataStructsFrame extends JFrame {
 		final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
+		// compare to
+		
 		final ArrayList<ListItem> list = arrayToList(numbers);
 
 		final ListPanel unorderedList = new ListPanel("Unordered List");
@@ -31,6 +34,7 @@ public class DataStructsFrame extends JFrame {
 		sortButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Collections.sort(list);
+				Collections.reverse(list);
 				orderedList.addItems(list);
 				panel.add(orderedList);
 				pack();
