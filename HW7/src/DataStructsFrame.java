@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class DataStructsFrame extends JFrame {
 	public DataStructsFrame(String title, int[] numbers, int[] bVals) {
@@ -31,6 +32,27 @@ public class DataStructsFrame extends JFrame {
 		sortButton.setSize(30, 10);
 		sortButton.setAlignmentX(LEFT_ALIGNMENT);
 		
+		// text field and btn for adding additional data
+		final JTextField newData = new JTextField("Add data using x, y format");
+		newData.setSize(30, 10);
+		newData.setAlignmentY(TOP_ALIGNMENT);
+		
+		JButton addData = new JButton("Add Data");
+		addData.setSize(30, 10);
+		addData.setAlignmentY(TOP_ALIGNMENT);
+		addData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				String text = newData.getText().toString();
+				String[] str = text.split(",");
+				panel.remove(unorderedList);
+				ListItem item = new ListItem(Integer.parseInt(str[0].trim()), Integer.parseInt(str[1].trim()));
+				list.add(item);
+				unorderedList.addItems(list);
+				panel.add(unorderedList);
+			}
+		});
+		
+		// new button added so list can be sorted by B values
 		JButton sortButtonB = new JButton("Sort List: B");
 		sortButton.setSize(30, 10);
 		sortButton.setAlignmentX(RIGHT_ALIGNMENT);
@@ -56,6 +78,8 @@ public class DataStructsFrame extends JFrame {
 		panel.add(unorderedList);
 		panel.add(sortButton);
 		panel.add(sortButtonB);
+		panel.add(addData);
+		panel.add(newData);
 		add(panel);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
